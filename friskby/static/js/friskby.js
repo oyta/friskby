@@ -1108,6 +1108,7 @@ var FriskbyModuleExtensions = (function ( Friskby ) {
                     renderTo: domElement,
                     type: 'line',
                     backgroundColor: 'transparent',
+                    zoomType: 'xy'
                 },
                 title: {
                     text: null
