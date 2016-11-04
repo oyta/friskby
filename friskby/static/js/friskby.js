@@ -902,19 +902,6 @@ var FriskbyModuleExtensions = (function ( Friskby ) {
         }
 
         var viewLayer = function( measurementTypeId, time ) {
-            /*
-            TODO: Test if it is faster to remove the existing layer and add a new layer instead if iterating all layers every time
-            
-            Alternative is to add an attribute which holds the current visible layer > set it to hidden > set the new one to visible > add the new one to the attribute
-            
-            Add LayerGroup for each measurement type ==> That will reduce the number of iteraations.
-            */
-            
-            /*
-            if( _activeMTId == measurementTypeId && _activeTime == time )
-                return;
-            */
-            
             _map.getLayers().forEach( function( layer, index, array ) {
                 if( layer.get("measurementTypeId") == measurementTypeId && layer.get("time") == time ) {
                     layer.setVisible( true );
@@ -923,50 +910,6 @@ var FriskbyModuleExtensions = (function ( Friskby ) {
                 else if( $.inArray( "measurementTypeId", layer.getKeys() ) >= 0 )
                     layer.setVisible( false );
             });
-            
-            /*
-            console.log("Changing map layer:");
-            _map.getLayers().forEach( function( layer, index, array ) {
-                
-                //console.log("\t\tMeasurement type layer " + layer.get("measurementTypeId") + " = input " + measurementTypeId );
-                
-                //console.log("\t\tTime layer " + layer.get("time") + " = input " + time );
-                
-                if( layer.get("measurementTypeId") == measurementTypeId && layer.get("time") == time ) {
-                    
-                    if( _activeLayer != null ) {
-                        //console.log(_activeLayer.getProperties());
-                        if( _activeLayer.get("title") != "Norway")
-                            _activeLayer.setVisible( false );
-                        else
-                            console.log("layer titlte: " + _activeLayer.get("title"));
-                    }
-                    else
-                        console.log("Active layer is null");
-                    
-                    _activeLayer = layer;
-                    layer.setVisible( true );
-                    _map.getView().fit( layer.getSource().getExtent(), _map.getSize() ); 
-                    
-                    /*
-                    console.log("\t\tThey both match - set layer visible");
-                    console.log("\t\tLayer extent: " + layer.getSource().getExtent());
-                    console.log("\t\tMap size: " + _map.getSize());
-                    console.log("\t\tLayer: ")
-                    console.log(layer.getSource().getFeatures());
-                    $.each( layer.getSource().getFeatures(), function( index, feature ) {
-                        console.log(feature.getGeometry().getCoordinates());
-                    });
-                    
-                    */
-                    /*
-                    return false;
-                }
-                else
-                    console.log("No match");
-            });
-            */
-            // _map.getView().setProperties({extent: _map.getView().calculateExtent( _map.getSize())});
         }
 
         /**
