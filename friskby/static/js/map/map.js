@@ -13,7 +13,7 @@ function createmap() {
     layers: [
       new ol.layer.Tile({
         source: new ol.source.Stamen({
-           layer: 'toner-lite'
+           layer: 'toner'
         })
       })
     ],
