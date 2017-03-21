@@ -62,6 +62,14 @@ div.header h1 {
     width: 100%;
 }
 
+#attribution {
+    font-family: arial, verdana, helvetica;
+    font-size: 10px;
+    color: #444;
+}
+
+
+
 table .valuecol {
     text-align: right;
 }
