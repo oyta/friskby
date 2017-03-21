@@ -1,0 +1,53 @@
+{% extends "friskby/friskby_base.html" %}
+{% block title %} Friskby {% endblock %}
+
+{% block js %}
+  <script src="{{ STATIC_URL }}js/include/ol.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/include/d3.v3.min.js" type="text/javascript"></script>
+  <script src="{{ STATIC_URL }}js/map/map.js"></script>
+  <script type="text/javascript">
+    var values = {{device_json|safe}};
+    window.onload = function() {
+      var date = "{{date}}";
+      var timestamp = "{{timestamp}}";
+      var map = createmap(timestamp); // from map.js
+      map.showDataFor(values, "datalist", timestamp);
+    };
+
+  </script>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block body %}
+<div class="header">
+  <h1>Friskby Bergen</h1>
+  <div class="navbar">
+    <ul>
+      <li>
+        <a href="?start={{previous_start}}&amp;time={{previous_end}}&amp;sensortype={{sensortype}}">Previous</a>
+      </li>
+      <li>
+        <a href="?start={{current_start}}&amp;time={{current_end}}&amp;sensortype={{othersensor}}">View
+          {{pretty_other}} data</a>
+      </li>
+      <li>
+        <a href="?start={{next_start}}&amp;time={{next_end}}&amp;sensortype={{sensortype}}">Next</a>
+      </li>
+      <li>
+        <a href="median">Trend</a>
+      </li>
+      </ul>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-12 col-m-12">
+    <div id="map" style="height: 600px;">
+    </div>
+  </div>
+</div>
+{% endblock %}
